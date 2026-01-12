@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eu te amo para sempre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --rosa-claro: #ffd6e7;
+            --rosa-medio: #ff85a2;
+            --rosa-escuro: #ff477e;
+            --roxo-claro: #d9c5f4;
+            --roxo-escuro: #8a4fff;
+            --dourado: #ffd166;
+            --texto: #4a2c40;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--rosa-claro), var(--roxo-claro));
+            color: var(--texto);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .titulo-principal {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--rosa-escuro), var(--roxo-escuro));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .subtitulo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--texto);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .coracao {
+            color: var(--rosa-escuro);
+            animation: pulsar 2s infinite;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .conteudo-principal {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .buque-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .buque {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: flutuar 6s ease-in-out infinite;
+        }
+
+        /* Flor Central Grande */
+        .flor-central {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            animation: pulsar-flor 4s infinite;
+        }
+
+        .flor-central:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .centro-flor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--dourado), #ff9e00);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 158, 0, 0.5);
+            z-index: 3;
+        }
+
+        .petala-grande {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ff2e63, #ff477e);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
+            z-index: 2;
+        }
+
+        .caule-grande {
+            position: absolute;
+            width: 8px;
+            height: 180px;
+            background: linear-gradient(to bottom, #1b5e20, #4caf50);
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        .folha-grande {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #4caf50;
+            border-radius: 50% 0 50% 0;
+            z-index: 1;
+        }
+
+        .flor {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--rosa-escuro), #ff2e63);
+            width: 40px;
+            height: 40px;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
+            transform-origin: center;
+        }
+
+        .petala {
+            position: absolute;
+            background: var(--rosa-escuro);
+            border-radius: 50% 50% 50% 0;
+            width: 20px;
+            height: 20px;
+            transform-origin: bottom center;
+        }
+
+        .caule {
+            position: absolute;
+            background: linear-gradient(to bottom, #2e7d32, #4caf50);
+            width: 4px;
+            height: 100px;
+            bottom: 0;
+            transform-origin: bottom;
+        }
+
+        .folha {
+            position: absolute;
+            background: #4caf50;
+            width: 15px;
+            height: 10px;
+            border-radius: 50% 0 50% 0;
+            transform-origin: center;
+        }
+
+        .mensagem-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mensagem-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--rosa-escuro), var(--roxo-escuro));
+        }
+
+        .mensagem-titulo {
+            font-size: 2.2rem;
+            color: var(--rosa-escuro);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .mensagem-texto {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .destaque {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--roxo-escuro);
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 214, 231, 0.5);
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--rosa-escuro);
+        }
+
+        .elementos-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flor-3d, .balao-3d {
+            position: absolute;
+            opacity: 0.7;
+            animation-timing-function: ease-in-out;
+        }
+
+        .flor-3d {
+            color: var(--rosa-escuro);
+            font-size: 1.5rem;
+        }
+
+        .balao-3d {
+            color: var(--roxo-escuro);
+            font-size: 2rem;
+        }
+
+        .rodape {
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 1.1rem;
+            color: var(--texto);
+            position: relative;
+            z-index: 2;
+        }
+
+        .assinatura {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--rosa-escuro);
+            margin-top: 1rem;
+            display: block;
+        }
+
+        .botao-interacao {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(to right, var(--rosa-escuro), var(--roxo-escuro));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
+        }
+
+        .botao-interacao:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 71, 126, 0.6);
+        }
+
+        .botao-interacao:active {
+            transform: translateY(0);
+        }
+
+        /* Modal para a mensagem da flor */
+        .modal-flor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .modal-flor.ativo {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .conteudo-modal {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.5s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff5f9, #f9f5ff);
+        }
+
+        .modal-flor.ativo .conteudo-modal {
+            transform: translateY(0);
+        }
+
+        .fechar-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--rosa-escuro);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .texto-modal {
+            font-size: 2rem;
+            color: var(--rosa-escuro);
+            font-weight: 700;
+            margin: 2rem 0;
+            line-height: 1.4;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .coracao-modal {
+            font-size: 3rem;
+            color: var(--rosa-escuro);
+            animation: pulsar 1.5s infinite;
+            display: block;
+            margin: 1rem 0;
+        }
+
+        .flor-modal {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulsar-flor {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes flutuar {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes girar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes flutuar-suave {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animacao-aparecer {
+            animation: aparecer 1.5s ease-out forwards;
+        }
+
+        @media (max-width: 768px) {
+            .titulo-principal {
+                font-size: 2.5rem;
+            }
+            
+            .subtitulo {
+                font-size: 1.2rem;
+            }
+            
+            .conteudo-principal {
+                flex-direction: column;
+            }
+            
+            .buque-container {
+                height: 400px;
+            }
+            
+            .mensagem-titulo {
+                font-size: 1.8rem;
+            }
+            
+            .flor-central {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .texto-modal {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal para a mensagem da flor -->
+    <div class="modal-flor" id="modalFlor">
+        <div class="conteudo-modal">
+            <button class="fechar-modal" id="fecharModal">×</button>
+            <div class="flor-modal">🌹</div>
+            <p class="texto-modal">"Um dia vou te dar um desse"</p>
+            <div class="coracao-modal">❤️</div>
+            <p>Esta é minha promessa de amor para você!</p>
+        </div>
+    </div>
+    
+    <div class="elementos-3d" id="elementos3d"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="titulo-principal">Eu te amo para sempre <span class="coracao">❤</span></h1>
+            <p class="subtitulo">Uma declaração eterna de amor, carinho e paixão que transcende o tempo</p>
+        </header>
+        
+        <main class="conteudo-principal">
+            <div class="buque-container">
+                <div class="buque" id="buque">
+                    <!-- Flor Central Grande e Interativa -->
+                    <div class="flor-central" id="florCentral">
+                        <div class="caule-grande">
+                            <div class="folha-grande" style="top: 30%; left: -20px; transform: rotate(-45deg);"></div>
+                            <div class="folha-grande" style="top: 60%; left: 25px; transform: rotate(45deg);"></div>
+                        </div>
+                        <!-- Pétalas da flor grande -->
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(0deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(45deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(90deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(135deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(180deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(225deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(270deg);"></div>
+                        <div class="petala-grande" style="transform: translate(-50%, -50%) rotate(315deg);"></div>
+                        <div class="centro-flor"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mensagem-container animacao-aparecer">
+                <h2 class="mensagem-titulo">Meu amor, esta é a minha promessa para você</h2>
+                
+                <p class="mensagem-texto">
+                    Em um mundo tão vasto e cheio de incertezas, encontrar você foi como descobrir a peça que faltava na minha alma. Cada momento ao seu lado é um tesouro que guardo no mais profundo do meu ser.
+                </p>
+                
+                <p class="mensagem-texto">
+                    Seu sorriso ilumina meus dias mais cinzentos, seu toque acalma minhas tempestades interiores, e seu amor transformou minha vida em algo que eu jamais imaginei ser possível.
+                </p>
+                
+                <div class="destaque">
+                    "Clique na flor vermelha ao lado<br>para descobrir uma promessa especial"
+                </div>
+                
+                <p class="mensagem-texto">
+                    Este site é apenas um reflexo pálido do que sinto por você. Queria poder encapsular em palavras a imensidão do meu amor, mas algumas coisas são tão grandiosas que só podem ser sentidas, não descritas.
+                </p>
+                
+                <button class="botao-interacao" id="botaoRomantico">
+                    <i class="fas fa-heart"></i> Clique para uma surpresa especial
+                </button>
+            </div>
+        </main>
+        
+        <footer class="rodape">
+            <p>Esta declaração de amor é eterna, assim como o que sinto por você.</p>
+            <p>Em cada batida do meu coração, em cada respiro, em cada pensamento...</p>
+            <span class="assinatura">Para sempre seu/sua.</span>
+        </footer>
+    </div>
+
+    <script>
+        // Criar elementos 3D flutuantes (flores e balões)
+        const elementos3d = document.getElementById('elementos3d');
+        const coresFlores = ['#ff477e', '#ff85a2', '#d9c5f4', '#8a4fff', '#ffd166'];
+        const emojisBaloes = ['🎈', '❤️', '💖', '💝', '🎀', '🌸', '🌹', '💐'];
+        
+        for (let i = 0; i < 25; i++) {
+            // Criar flores 3D
+            const flor = document.createElement('div');
+            flor.className = 'flor-3d';
+            flor.innerHTML = '🌸';
+            
+            // Posicionamento aleatório
+            const tamanho = Math.random() * 30 + 20;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const duracao = Math.random() * 20 + 20;
+            const atraso = Math.random() * 5;
+            const rotacao = Math.random() * 360;
+            
+            flor.style.left = `${left}%`;
+            flor.style.top = `${top}%`;
+            flor.style.fontSize = `${tamanho}px`;
+            flor.style.animation = `flutuar-suave ${duracao}s infinite ${atraso}s`;
+            flor.style.transform = `rotate(${rotacao}deg)`;
+            flor.style.color = coresFlores[Math.floor(Math.random() * coresFlores.length)];
+            
+            elementos3d.appendChild(flor);
+            
+            // Criar balões 3D
+            if (i < 15) {
+                const balao = document.createElement('div');
+                balao.className = 'balao-3d';
+                balao.innerHTML = emojisBaloes[Math.floor(Math.random() * emojisBaloes.length)];
+                
+                const tamanhoBalao = Math.random() * 40 + 30;
+                const leftBalao = Math.random() * 100;
+                const topBalao = Math.random() * 100;
+                const duracaoBalao = Math.random() * 25 + 25;
+                const atrasoBalao = Math.random() * 7;
+                const rotacaoBalao = Math.random() * 360;
+                
+                balao.style.left = `${leftBalao}%`;
+                balao.style.top = `${topBalao}%`;
+                balao.style.fontSize = `${tamanhoBalao}px`;
+                balao.style.animation = `flutuar-suave ${duracaoBalao}s infinite ${atrasoBalao}s`;
+                balao.style.transform = `rotate(${rotacaoBalao}deg)`;
+                
+                elementos3d.appendChild(balao);
+            }
+        }
+        
+        // Criar buquê de flores interativo
+        const buque = document.getElementById('buque');
+        const numeroFlores = 18;
+        
+        for (let i = 0; i < numeroFlores; i++) {
+            const flor = document.createElement('div');
+            flor.className = 'flor';
+            
+            // Posicionamento das flores em forma de buquê (ao redor da flor central)
+            const angulo = (i / numeroFlores) * Math.PI * 2;
+            const raio = i < 6 ? 100 : (i < 12 ? 140 : 180);
+            const x = Math.cos(angulo) * raio;
+            const y = Math.sin(angulo) * raio - (i < 6 ? 0 : 40);
+            
+            flor.style.left = `calc(50% + ${x}px)`;
+            flor.style.top = `calc(50% + ${y}px)`;
+            flor.style.backgroundColor = i % 3 === 0 ? '#ff2e63' : (i % 3 === 1 ? '#ff477e' : '#ff85a2');
+            
+            // Adicionar pétalas
+            for (let p = 0; p < 8; p++) {
+                const petala = document.createElement('div');
+                petala.className = 'petala';
+                const petalaAngulo = (p / 8) * Math.PI * 2;
+                const petalaRaio = 25;
+                const petalaX = Math.cos(petalaAngulo) * petalaRaio;
+                const petalaY = Math.sin(petalaAngulo) * petalaRaio;
+                
+                petala.style.left = `calc(50% + ${petalaX}px)`;
+                petala.style.top = `calc(50% + ${petalaY}px)`;
+                petala.style.transform = `rotate(${petalaAngulo}rad)`;
+                petala.style.backgroundColor = flor.style.backgroundColor;
+                
+                flor.appendChild(petala);
+            }
+            
+            // Adicionar caule
+            const caule = document.createElement('div');
+            caule.className = 'caule';
+            caule.style.left = '50%';
+            caule.style.height = `${120 + Math.random() * 30}px`;
+            caule.style.transform = `translateX(-50%) rotate(${Math.random() * 10 - 5}deg)`;
+            
+            // Adicionar folhas ao caule
+            for (let f = 0; f < 2; f++) {
+                const folha = document.createElement('div');
+                folha.className = 'folha';
+                folha.style.left = `${50 + (f === 0 ? -10 : 10)}%`;
+                folha.style.top = `${70 + Math.random() * 20}%`;
+                folha.style.transform = `rotate(${f === 0 ? -30 : 30}deg)`;
+                caule.appendChild(folha);
+            }
+            
+            flor.appendChild(caule);
+            buque.appendChild(flor);
+        }
+        
+        // Interatividade da Flor Central
+        const florCentral = document.getElementById('florCentral');
+        const modalFlor = document.getElementById('modalFlor');
+        const fecharModal = document.getElementById('fecharModal');
+        
+        // Adicionar efeito de brilho à flor
+        const criarBrilho = () => {
+            const brilho = document.createElement('div');
+            brilho.style.position = 'absolute';
+            brilho.style.top = '50%';
+            brilho.style.left = '50%';
+            brilho.style.transform = 'translate(-50%, -50%)';
+            brilho.style.width = '150px';
+            brilho.style.height = '150px';
+            brilho.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)';
+            brilho.style.borderRadius = '50%';
+            brilho.style.zIndex = '1';
+            brilho.style.pointerEvents = 'none';
+            brilho.style.opacity = '0';
+            brilho.style.animation = 'pulsar 2s infinite';
+            
+            florCentral.appendChild(brilho);
+            
+            // Animar o brilho
+            setTimeout(() => {
+                brilho.style.opacity = '0.6';
+                brilho.style.transition = 'opacity 0.5s ease';
+            }, 100);
+        };
+        
+        // Criar brilho inicial
+        criarBrilho();
+        
+        // Adicionar animação às pétalas da flor central
+        const petalas = document.querySelectorAll('.petala-grande');
+        petalas.forEach((petala, index) => {
+            // Animação suave de movimento
+            setInterval(() => {
+                const rotacaoAtual = parseFloat(petala.style.transform.match(/rotate\(([^)]+)\)/)[1]);
+                const novaRotacao = rotacaoAtual + (Math.random() * 2 - 1);
+                petala.style.transform = `translate(-50%, -50%) rotate(${novaRotacao}deg)`;
+            }, 1000 + index * 100);
+        });
+        
+        // Abrir modal ao clicar na flor
+        florCentral.addEventListener('click', function() {
+            modalFlor.classList.add('ativo');
+            
+            // Efeito visual adicional ao clicar
+            this.style.transform = 'translate(-50%, -50%) scale(1.2)';
+            this.style.filter = 'brightness(1.3)';
+            
+            // Criar partículas de amor
+            for (let i = 0; i < 20; i++) {
+                const particula = document.createElement('div');
+                particula.innerHTML = '❤️';
+                particula.style.position = 'fixed';
+                particula.style.fontSize = `${Math.random() * 20 + 15}px`;
+                particula.style.left = `calc(50% + ${Math.random() * 100 - 50}px)`;
+                particula.style.top = `calc(50% + ${Math.random() * 100 - 50}px)`;
+                particula.style.color = '#ff477e';
+                particula.style.zIndex = '1001';
+                particula.style.pointerEvents = 'none';
+                particula.style.animation = `flutuar-suave ${Math.random() * 2 + 1}s forwards`;
+                
+                document.body.appendChild(particula);
+                
+                // Remover após animação
+                setTimeout(() => {
+                    particula.remove();
+                }, 3000);
+            }
+            
+            // Voltar ao normal após um tempo
+            setTimeout(() => {
+                this.style.transform = 'translate(-50%, -50%) scale(1)';
+                this.style.filter = 'brightness(1)';
+            }, 300);
+        });
+        
+        // Fechar modal
+        fecharModal.addEventListener('click', function() {
+            modalFlor.classList.remove('ativo');
+        });
+        
+        // Fechar modal ao clicar fora
+        modalFlor.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('ativo');
+            }
+        });
+        
+        // Interatividade do botão romântico
+        const botaoRomantico = document.getElementById('botaoRomantico');
+        let mensagensEspeciais = [
+            "Você é a melhor coisa que já aconteceu na minha vida.",
+            "Cada dia ao seu lado é um presente que eu nunca vou deixar de valorizar.",
+            "Seu amor transformou minha existência em algo verdadeiramente mágico.",
+            "Prometo amar você hoje, amanhã e por toda a eternidade.",
+            "Nos seus olhos encontrei meu lugar favorito no universo.",
+            "Você é meu hoje e todos os meus amanhãs.",
+            "Amo você mais do que todas as palavras em todos os idiomas poderiam expressar."
+        ];
+        
+        let indiceMensagem = 0;
+        
+        botaoRomantico.addEventListener('click', function() {
+            // Efeito visual no botão
+            this.innerHTML = `<i class="fas fa-heart"></i> ${mensagensEspeciais[indiceMensagem]}`;
+            this.style.background = 'linear-gradient(to right, #8a4fff, #ff85a2)';
+            
+            // Criar corações flutuantes
+            for (let i = 0; i < 15; i++) {
+                const coracao = document.createElement('div');
+                coracao.innerHTML = '❤️';
+                coracao.style.position = 'fixed';
+                coracao.style.fontSize = `${Math.random() * 25 + 15}px`;
+                coracao.style.left = `${Math.random() * 100}%`;
+                coracao.style.top = '100%';
+                coracao.style.color = coresFlores[Math.floor(Math.random() * coresFlores.length)];
+                coracao.style.zIndex = '1000';
+                coracao.style.pointerEvents = 'none';
+                coracao.style.animation = `flutuar-suave ${Math.random() * 3 + 2}s forwards`;
+                
+                document.body.appendChild(coracao);
+                
+                // Remover após animação
+                setTimeout(() => {
+                    coracao.remove();
+                }, 5000);
+            }
+            
+            // Atualizar índice para próxima mensagem
+            indiceMensagem = (indiceMensagem + 1) % mensagensEspeciais.length;
+            
+            // Restaurar botão após alguns segundos
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-heart"></i> Clique para outra mensagem especial';
+                this.style.background = 'linear-gradient(to right, #ff477e, #8a4fff)';
+            }, 4000);
+        });
+        
+        // Efeito de digitação no subtítulo
+        const subtitulo = document.querySelector('.subtitulo');
+        const textoOriginal = subtitulo.textContent;
+        subtitulo.textContent = '';
+        
+        let charIndex = 0;
+        function digitarEfeito() {
+            if (charIndex < textoOriginal.length) {
+                subtitulo.textContent += textoOriginal.charAt(charIndex);
+                charIndex++;
+                setTimeout(digitarEfeito, 50);
+            }
+        }
+        
+        // Iniciar efeito de digitação após a página carregar
+        window.addEventListener('load', () => {
+            setTimeout(digitarEfeito, 1000);
+            
+            // Animação de entrada para elementos
+            const elementos = document.querySelectorAll('.mensagem-container, .buque-container');
+            elementos.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.3}s`;
+                el.classList.add('animacao-aparecer');
+            });
+        });
+    </script>
+</body>
+</html>
